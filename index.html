@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>REZZ PROJECT - Murottal 30 Juz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-deep: #04130e;
+      --bg-emerald: #082319;
+      --card-bg: rgba(10, 36, 26, 0.86);
+      --card-soft: rgba(16, 52, 38, 0.9);
+      --gold: #f1c75b;
+      --gold-bright: #ffe08a;
+      --emerald-glow: #19e68c;
+      --emerald-soft: rgba(25, 230, 140, 0.14);
+      --gold-soft: rgba(241, 199, 91, 0.14);
+      --border-glow: rgba(25, 230, 140, 0.34);
+      --border-gold: rgba(241, 199, 91, 0.36);
+      --text-main: #f4faf6;
+      --text-muted: #9ec0b1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-main);
+      min-height: 100vh;
+      background-color: var(--bg-deep);
+      /* Motif Geometri Islami + Cahaya Zamrud & Emas */
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(25, 230, 140, 0.18) 0%, transparent 52%),
+        radial-gradient(circle at 85% 85%, rgba(241, 199, 91, 0.12) 0%, transparent 48%),
+        url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2319e68c' stroke-opacity='0.07' stroke-width='1'%3E%3Cpath d='M40 0L80 40L40 80L0 40Z'/%3E%3Cpath d='M40 12L68 40L40 68L12 40Z'/%3E%3Crect x='20' y='20' width='40' height='40'/%3E%3Ccircle cx='40' cy='40' r='10'/%3E%3C/g%3E%3C/svg%3E");
+      display: flex;
+      justify-content: center;
+      padding: 16px 16px 88px;
+    }
+
+    /* SPLASH SCREEN ISLAMI MEWAH */
+    #splash-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      background-color: #03100b;
+      background-image:
+        radial-gradient(circle at 50% 28%, rgba(241, 199, 91, 0.22), transparent 55%),
+        radial-gradient(circle at 50% 75%, rgba(25, 230, 140, 0.16), transparent 60%),
+        url("data:image/svg+xml,%3Csvg width='96' height='96' viewBox='0 0 96 96' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23f1c75b' stroke-opacity='0.08' stroke-width='1'%3E%3Cpath d='M48 0L96 48L48 96L0 48Z'/%3E%3Crect x='24' y='24' width='48' height='48'/%3E%3Ccircle cx='48' cy='48' r='16'/%3E%3C/g%3E%3C/svg%3E");
+      transition: opacity 0.45s ease, visibility 0.45s ease;
+    }
+
+    #splash-screen.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .splash-frame {
+      width: 100%;
+      max-width: 390px;
+      padding: 32px 22px;
+      border-radius: 26px;
+      background: linear-gradient(165deg, rgba(11, 41, 29, 0.92), rgba(5, 20, 14, 0.95));
+      border: 1px solid var(--border-gold);
+      box-shadow:
+        0 0 40px rgba(25, 230, 140, 0.14),
+        inset 0 0 24px rgba(241, 199, 91, 0.08);
+    }
+
+    .arabic-ornament {
+      font-family: 'Amiri', serif;
+      font-size: 28px;
+      color: var(--gold-bright);
+      text-shadow: 0 0 16px rgba(241, 199, 91, 0.35);
+      margin-bottom: 12px;
+    }
+
+    .divider-ornament {
+      width: 120px;
+      height: 2px;
+      margin: 0 auto 16px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--emerald-glow), var(--gold), transparent);
+    }
+
+    .brand-title {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: #ffffff;
+      text-shadow: 0 0 22px rgba(25, 230, 140, 0.35);
+    }
+
+    .brand-title span {
+      color: var(--gold);
+      text-shadow: 0 0 20px rgba(241, 199, 91, 0.4);
+    }
+
+    .splash-subtitle {
+      margin-top: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--emerald-glow);
+      letter-spacing: 1px;
+    }
+
+    .splash-desc {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .btn-enter {
+      margin-top: 26px;
+      width: 100%;
+      background: linear-gradient(135deg, #ffe08a 0%, #e5b33c 50%, #c8911e 100%);
+      color: #05160f;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      cursor: pointer;
+      box-shadow: 0 8px 26px rgba(241, 199, 91, 0.35);
+    }
+
+    /* SHELL UTAMA */
+    .app-shell {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .top-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-radius: 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-glow);
+      box-shadow: 0 0 22px rgba(25, 230, 140, 0.1);
+      backdrop-filter: blur(8px);
+    }
+
+    .top-header-title {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: var(--emerald-glow);
+      text-shadow: 0 0 12px rgba(25, 230, 140, 0.35);
+    }
+
+    .top-header-title span {
+      color: var(--gold);
+    }
+
+    .top-header-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+      background: var(--gold-soft);
+      border: 1px solid var(--border-gold);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .page-section {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .page-section.active {
+      display: flex;
+    }
+
+    /* MODE SWITCH & CARD */
+    .mode-switch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      background: var(--card-bg);
+      padding: 6px;
+      border-radius: 15px;
+      border: 1px solid var(--border-glow);
+    }
+
+    .mode-btn {
+      padding: 11px 10px;
+      border: 1px solid transparent;
+      border-radius: 11px;
+      background: transparent;
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .mode-btn.active {
+      background: linear-gradient(135deg, rgba(25, 230, 140, 0.18), rgba(241, 199, 91, 0.14));
+      color: var(--gold-bright);
+      border-color: var(--border-gold);
+      box-shadow: 0 0 14px rgba(25, 230, 140, 0.15);
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-glow);
+      border-radius: 18px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(8px);
+    }
+
+    label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    select {
+      width: 100%;
+      padding: 12px 13px;
+      border-radius: 12px;
+      border: 1px solid var(--border-gold);
+      background: var(--card-soft);
+      color: var(--text-main);
+      font-size: 14px;
+      font-weight: 600;
+      outline: none;
+    }
+
+    /* NOW PLAYING CARD */
+    .now-playing {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(241, 199, 91, 0.18), transparent 65%),
+        linear-gradient(160deg, rgba(13, 48, 34, 0.95), rgba(6, 23, 16, 0.96));
+      border: 1px solid var(--border-gold);
+      border-radius: 20px;
+      padding: 20px 16px;
+      text-align: center;
+      box-shadow:
+        0 0 28px rgba(25, 230, 140, 0.14),
+        inset 0 0 22px rgba(241, 199, 91, 0.06);
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--emerald-glow);
+      background: var(--emerald-soft);
+      border: 1px solid var(--border-glow);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+
+    .track-title {
+      font-size: 21px;
+      font-weight: 800;
+      color: #ffffff;
+      text-shadow: 0 0 14px rgba(241, 199, 91, 0.25);
+    }
+
+    .track-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 5px;
+      min-height: 18px;
+    }
+
+    /* EQUALIZER VISUAL HALUS */
+    .wave-bars {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 4px;
+      height: 22px;
+      margin: 14px auto 4px;
+    }
+
+    .wave-bars span {
+      width: 4px;
+      height: 6px;
+      border-radius: 99px;
+      background: linear-gradient(180deg, var(--gold-bright), var(--emerald-glow));
+      transition: height 0.2s ease;
+    }
+
+    .wave-bars.playing span {
+      animation: pulseBar 0.9s infinite ease-in-out;
+    }
+
+    .wave-bars.playing span:nth-child(2) { animation-delay: 0.15s; }
+    .wave-bars.playing span:nth-child(3) { animation-delay: 0.3s; }
+    .wave-bars.playing span:nth-child(4) { animation-delay: 0.1s; }
+    .wave-bars.playing span:nth-child(5) { animation-delay: 0.25s; }
+    .wave-bars.playing span:nth-child(6) { animation-delay: 0.4s; }
+
+    @keyframes pulseBar {
+      0%, 100% { height: 6px; opacity: 0.55; }
+      50% { height: 22px; opacity: 1; }
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .ctrl-btn {
+      border: 1px solid var(--border-glow);
+      border-radius: 13px;
+      padding: 11px 16px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      background: var(--card-soft);
+      color: var(--text-main);
+    }
+
+    .ctrl-btn.primary {
+      background: linear-gradient(135deg, #ffe08a 0%, #e5b33c 55%, #c8911e 100%);
+      color: #05160f;
+      padding: 12px 24px;
+      border: none;
+      font-weight: 800;
+      box-shadow: 0 6px 20px rgba(241, 199, 91, 0.3);
+    }
+
+    .auto-row {
+      margin-top: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .auto-row input {
+      accent-color: var(--emerald-glow);
+    }
+
+    /* HALAMAN TENTANG (MENGIKUTI STRUKTUR REFERENSI) */
+    .about-card {
+      background: linear-gradient(160deg, rgba(13, 48, 34, 0.92), rgba(6, 22, 16, 0.95));
+      border: 1px solid var(--border-glow);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 0 18px rgba(25, 230, 140, 0.08);
+    }
+
+    .about-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--emerald-glow);
+      margin-bottom: 6px;
+    }
+
+    .about-date {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .about-name {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--gold-bright);
+      margin-bottom: 4px;
+    }
+
+    .about-role {
+      font-size: 13px;
+      color: #d6ebe1;
+      line-height: 1.5;
+    }
+
+    .about-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    .about-notice {
+      background: linear-gradient(135deg, rgba(25, 230, 140, 0.12), rgba(241, 199, 91, 0.12));
+      border: 1px solid var(--border-gold);
+      border-radius: 14px;
+      padding: 14px 16px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold-bright);
+      box-shadow: 0 0 18px rgba(241, 199, 91, 0.12);
+    }
+
+    /* BOTTOM NAVIGATION */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 10px 16px 14px;
+      background: rgba(4, 19, 14, 0.94);
+      border-top: 1px solid var(--border-glow);
+      backdrop-filter: blur(10px);
+      z-index: 40;
+    }
+
+    .nav-btn {
+      padding: 11px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(11, 41, 29, 0.85);
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .nav-btn.active {
+      background: linear-gradient(135deg, #19e68c, #0fb86e);
+      color: #04130e;
+      border-color: transparent;
+      box-shadow: 0 0 18px rgba(25, 230, 140, 0.38);
+    }
+  </style>
+</head>
+<body>
+  <!-- SPLASH SCREEN -->
+  <div id="splash-screen">
+    <div class="splash-frame">
+      <div class="arabic-ornament">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+      <div class="divider-ornament"></div>
+      <div class="brand-title">REZZ <span>PROJECT</span></div>
+      <div class="splash-subtitle">Murottal 30 Juz</div>
+      <p class="splash-desc">Pemutar audio murottal Al-Qur'an 30 Juz dengan pilihan Surah dan Juz.</p>
+      <button class="btn-enter" onclick="masukAplikasi()">Masuk</button>
+    </div>
+  </div>
+
+  <!-- KONTEN UTAMA -->
+  <div class="app-shell">
+    <div class="top-header">
+      <div class="top-header-title">REZZ <span>PROJECT</span></div>
+      <div class="top-header-tag">Murottal 30 Juz</div>
+    </div>
+
+    <!-- HALAMAN HOME -->
+    <div id="page-home" class="page-section active">
+      <div class="mode-switch">
+        <button id="btn-mode-surah" class="mode-btn active" onclick="setMode('surah')">Pilih Surah (1–114)</button>
+        <button id="btn-mode-juz" class="mode-btn" onclick="setMode('juz')">Pilih Juz (1–30)</button>
+      </div>
+
+      <div class="card">
+        <div>
+          <label for="qari-select">Qari</label>
+          <select id="qari-select" onchange="gantiQari()">
+            <option value="ar.alafasy">Mishary Rashid Alafasy</option>
+            <option value="ar.husary">Mahmoud Khalil Al-Husary</option>
+            <option value="ar.minshawi">Mohamed Siddiq El-Minshawi</option>
+            <option value="ar.abdulbasitmurattal">Abdul Basit (Murattal)</option>
+          </select>
+        </div>
+
+        <div id="box-surah">
+          <label for="surah-select">Daftar Surah</label>
+          <select id="surah-select" onchange="pilihSurah(this.value)"></select>
+        </div>
+
+        <div id="box-juz" style="display:none;">
+          <label for="juz-select">Daftar Juz</label>
+          <select id="juz-select" onchange="pilihJuz(this.value)"></select>
+        </div>
+      </div>
+
+      <div class="now-playing">
+        <div id="mode-badge" class="badge">MODE SURAH</div>
+        <div id="track-title" class="track-title">1. Al-Fatihah</div>
+        <div id="track-sub" class="track-sub">Siap diputar</div>
+
+        <div id="wave-bars" class="wave-bars">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <div class="controls">
+          <button class="ctrl-btn" onclick="prevItem()">⏮ Prev</button>
+          <button id="btn-play" class="ctrl-btn primary" onclick="togglePlay()">▶ Putar</button>
+          <button class="ctrl-btn" onclick="nextItem()">Next ⏭</button>
+        </div>
+
+        <div class="auto-row">
+          <input type="checkbox" id="auto-next" checked />
+          <label for="auto-next" style="margin:0; text-transform:none; letter-spacing:0; color:var(--text-muted); font-weight:500; cursor:pointer;">
+            Lanjut otomatis ke bagian berikutnya
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- HALAMAN TENTANG -->
+    <div id="page-tentang" class="page-section">
+      <div class="about-card">
+        <div class="about-label">DI RILIS OLEH: REZZ PROJECT</div>
+        <div class="about-date">Pada tanggal _ November 2026</div>
+        <div class="about-name">Reza</div>
+        <div class="about-role">
+          Software Engineer &amp; Application Developer<br />
+          Sekaligus (CEO) dari REZZ PROJECT
+        </div>
+      </div>
+
+      <div class="about-card">
+        <div class="about-label">INSTAGRAM</div>
+        <div class="about-value">
+          @__eyzz11__<br />
+          @_rezz_project_
+        </div>
+      </div>
+
+      <div class="about-card">
+        <div class="about-label">TIKTOK</div>
+        <div class="about-value">@eyzz__11</div>
+      </div>
+
+      <div class="about-card">
+        <div class="about-label">WHATSAPP</div>
+        <div class="about-value">085138939550</div>
+      </div>
+
+      <div class="about-notice">
+        Silakan hubungi developer jika ada masalah atau butuh bantuan
+      </div>
+    </div>
+
+    <audio id="audio-player"></audio>
+  </div>
+
+  <!-- NAVIGASI BAWAH -->
+  <nav class="bottom-nav">
+    <button id="nav-home" class="nav-btn active" onclick="bukaHalaman('home')">Home</button>
+    <button id="nav-tentang" class="nav-btn" onclick="bukaHalaman('tentang')">Tentang</button>
+  </nav>
+
+  <script>
+    const STORAGE_KEY = 'rezz_murottal_state_v2';
+    const player = document.getElementById('audio-player');
+    const surahSelect = document.getElementById('surah-select');
+    const juzSelect = document.getElementById('juz-select');
+    const qariSelect = document.getElementById('qari-select');
+    const btnPlay = document.getElementById('btn-play');
+    const waveBars = document.getElementById('wave-bars');
+
+    let mode = 'surah';
+    let surahList = [];
+    let currentSurahNum = 1;
+    let currentJuzNum = 1;
+    let playlistUrls = [];
+    let playlistIndex = 0;
+    let isPlaying = false;
+
+    function bukaHalaman(tab) {
+      document.getElementById('page-home').classList.toggle('active', tab === 'home');
+      document.getElementById('page-tentang').classList.toggle('active', tab === 'tentang');
+      document.getElementById('nav-home').classList.toggle('active', tab === 'home');
+      document.getElementById('nav-tentang').classList.toggle('active', tab === 'tentang');
+    }
+
+    function simpanState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          mode,
+          currentSurahNum,
+          currentJuzNum,
+          qari: qariSelect.value
+        }));
+      } catch (e) {}
+    }
+
+    function muatState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const data = JSON.parse(raw);
+        if (data.mode === 'juz' || data.mode === 'surah') mode = data.mode;
+        if (data.currentSurahNum) currentSurahNum = Number(data.currentSurahNum);
+        if (data.currentJuzNum) currentJuzNum = Number(data.currentJuzNum);
+        if (data.qari) qariSelect.value = data.qari;
+      } catch (e) {}
+    }
+
+    function updateMediaSession() {
+      if (!('mediaSession' in navigator)) return;
+      const titleText = document.getElementById('track-title').textContent;
+      const subText = document.getElementById('track-sub').textContent;
+      const qariName = qariSelect.options[qariSelect.selectedIndex]?.text || 'REZZ PROJECT';
+
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: titleText,
+        artist: qariName,
+        album: `REZZ PROJECT • ${subText}`
+      });
+
+      navigator.mediaSession.playbackState = !player.paused ? 'playing' : 'paused';
+      navigator.mediaSession.setActionHandler('play', () => player.play().catch(() => {}));
+      navigator.mediaSession.setActionHandler('pause', () => player.pause());
+      navigator.mediaSession.setActionHandler('previoustrack', () => prevItem());
+      navigator.mediaSession.setActionHandler('nexttrack', () => nextItem());
+    }
+
+    function masukAplikasi() {
+      document.getElementById('splash-screen').classList.add('hide');
+    }
+
+    function applyModeUI() {
+      document.getElementById('btn-mode-surah').classList.toggle('active', mode === 'surah');
+      document.getElementById('btn-mode-juz').classList.toggle('active', mode === 'juz');
+      document.getElementById('box-surah').style.display = mode === 'surah' ? 'block' : 'none';
+      document.getElementById('box-juz').style.display = mode === 'juz' ? 'block' : 'none';
+      document.getElementById('mode-badge').textContent = mode === 'surah' ? 'MODE SURAH' : 'MODE JUZ';
+    }
+
+    function setMode(newMode) {
+      mode = newMode;
+      applyModeUI();
+      simpanState();
+
+      if (mode === 'surah') {
+        muatSurah(currentSurahNum, false);
+      } else {
+        muatJuz(currentJuzNum, false);
+      }
+    }
+
+    async function initData() {
+      for (let j = 1; j <= 30; j++) {
+        const opt = document.createElement('option');
+        opt.value = j;
+        opt.textContent = `Juz ${j}`;
+        juzSelect.appendChild(opt);
+      }
+
+      try {
+        const res = await fetch('https://api.alquran.cloud/v1/surah');
+        const json = await res.json();
+        if (json.code === 200) {
+          surahList = json.data;
+          surahList.forEach(s => {
+            const opt = document.createElement('option');
+            opt.value = s.number;
+            opt.textContent = `${s.number}. ${s.englishName} (${s.name})`;
+            surahSelect.appendChild(opt);
+          });
+
+          muatState();
+          applyModeUI();
+
+          if (mode === 'surah') {
+            await muatSurah(currentSurahNum, false);
+          } else {
+            await muatJuz(currentJuzNum, false);
+          }
+        }
+      } catch (err) {
+        document.getElementById('track-sub').textContent = 'Gagal memuat daftar surah.';
+      }
+    }
+
+    async function muatSurah(num, autoPlay = true) {
+      currentSurahNum = Number(num);
+      surahSelect.value = currentSurahNum;
+      simpanState();
+
+      const qari = qariSelect.value;
+      const info = surahList.find(s => s.number === currentSurahNum);
+
+      document.getElementById('track-title').textContent = info
+        ? `${info.number}. ${info.englishName}`
+        : `Surah ${currentSurahNum}`;
+      document.getElementById('track-sub').textContent = 'Memuat audio surah...';
+      updateMediaSession();
+
+      try {
+        const res = await fetch(`https://api.alquran.cloud/v1/surah/${currentSurahNum}/${qari}`);
+        const json = await res.json();
+        if (json.code === 200) {
+          playlistUrls = json.data.ayahs.map(a => a.audio);
+          playlistIndex = 0;
+          putarIndex(autoPlay);
+        }
+      } catch (err) {
+        document.getElementById('track-sub').textContent = 'Gagal memuat audio surah.';
+      }
+    }
+
+    async function muatJuz(juzNum, autoPlay = true) {
+      currentJuzNum = Number(juzNum);
+      juzSelect.value = currentJuzNum;
+      simpanState();
+
+      const qari = qariSelect.value;
+
+      document.getElementById('track-title').textContent = `Juz ${currentJuzNum}`;
+      document.getElementById('track-sub').textContent = 'Memuat audio juz...';
+      updateMediaSession();
+
+      try {
+        const res = await fetch(`https://api.alquran.cloud/v1/juz/${currentJuzNum}/${qari}`);
+        const json = await res.json();
+        if (json.code === 200) {
+          playlistUrls = json.data.ayahs.map(a => a.audio);
+          playlistIndex = 0;
+          putarIndex(autoPlay);
+        }
+      } catch (err) {
+        document.getElementById('track-sub').textContent = 'Gagal memuat audio juz.';
+      }
+    }
+
+    function putarIndex(shouldPlay = true) {
+      if (!playlistUrls.length) return;
+      player.src = playlistUrls[playlistIndex];
+      document.getElementById('track-sub').textContent =
+        `Bagian audio ${playlistIndex + 1} dari ${playlistUrls.length}`;
+      updateMediaSession();
+
+      if (shouldPlay) {
+        player.play().catch(() => {});
+      }
+    }
+
+    function togglePlay() {
+      if (!player.src) {
+        if (mode === 'surah') muatSurah(currentSurahNum, true);
+        else muatJuz(currentJuzNum, true);
+        return;
+      }
+
+      if (player.paused) {
+        player.play().catch(() => {});
+      } else {
+        player.pause();
+      }
+    }
+
+    function pilihSurah(val) {
+      if (!val) return;
+      muatSurah(val, true);
+    }
+
+    function pilihJuz(val) {
+      if (!val) return;
+      muatJuz(val, true);
+    }
+
+    function gantiQari() {
+      simpanState();
+      if (mode === 'surah') muatSurah(currentSurahNum, isPlaying);
+      else muatJuz(currentJuzNum, isPlaying);
+    }
+
+    function nextItem() {
+      if (playlistIndex + 1 < playlistUrls.length) {
+        playlistIndex++;
+        putarIndex(true);
+      } else if (mode === 'surah' && currentSurahNum < 114) {
+        muatSurah(currentSurahNum + 1, true);
+      } else if (mode === 'juz' && currentJuzNum < 30) {
+        muatJuz(currentJuzNum + 1, true);
+      } else {
+        isPlaying = false;
+        btnPlay.textContent = '▶ Putar';
+        waveBars.classList.remove('playing');
+        document.getElementById('track-sub').textContent = 'Selesai.';
+        updateMediaSession();
+      }
+    }
+
+    function prevItem() {
+      if (playlistIndex > 0) {
+        playlistIndex--;
+        putarIndex(true);
+      } else if (mode === 'surah' && currentSurahNum > 1) {
+        muatSurah(currentSurahNum - 1, true);
+      } else if (mode === 'juz' && currentJuzNum > 1) {
+        muatJuz(currentJuzNum - 1, true);
+      }
+    }
+
+    player.addEventListener('play', () => {
+      isPlaying = true;
+      btnPlay.textContent = '⏸ Jeda';
+      waveBars.classList.add('playing');
+      updateMediaSession();
+    });
+
+    player.addEventListener('pause', () => {
+      isPlaying = false;
+      btnPlay.textContent = '▶ Putar';
+      waveBars.classList.remove('playing');
+      updateMediaSession();
+    });
+
+    player.addEventListener('ended', () => {
+      if (document.getElementById('auto-next').checked) {
+        nextItem();
+      } else {
+        isPlaying = false;
+        btnPlay.textContent = '▶ Putar';
+        waveBars.classList.remove('playing');
+        updateMediaSession();
+      }
+    });
+
+    initData();
+  </script>
+</body>
+</html>
